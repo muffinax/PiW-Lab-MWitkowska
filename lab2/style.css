@@ -1,0 +1,121 @@
+:root {
+  --list-bg: #f3f4f7;
+  --list-text: #20232b;
+  --task-text: #7e7e7e;
+
+  --list-surface: #ffffff;
+  --list-border: 1px solid #333333;
+
+  --radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  margin-bottom: 1.5rem;
+  background-color: var(--list-bg);
+}
+
+body {
+  padding: 1rem;
+  background: var(--list-bg);
+  color: var(--list-text);
+}
+
+.list-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: var(--list-surface);
+    border-radius: var(--radius);
+    border: var(--list-border);
+    padding: 1.5rem;
+    max-width: 500px;
+  margin: 0 auto;
+}
+
+.list-title {
+    margin-right: 10% auto;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 0.5rem;
+}
+
+.task-title {
+    margin-right: 10% auto;
+    color: var(--list-text);
+    font-size: 1.2rem;
+}
+
+.done-task-title {
+    margin-right: 10% auto;
+    text-decoration: line-through;
+    color: var(--task-text);
+    font-size: 1.2rem;
+}
+
+.list-tasks {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-bottom: 0.5rem;
+}
+
+.list-task-line {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 5px;
+}
+
+.back-task-button {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 8px 16px;
+}
+
+.new-task-button {
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 8px 16px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .list-card {
+    padding: 1rem;
+  }
+
+  .list-title {
+    font-size: 1.15rem;
+  }
+
+  .list-task-line,
+  .task-title, 
+  .done-task-title {
+    font-size: 1rem; 
+  }
+
+  .new-task-button, 
+  .back-task-button {
+    font-size: 1rem;
+    width: 100%; 
+    padding: 10px 16px;
+  }
+
+  .list-task-line {
+    gap: 8px;
+  }
+}
