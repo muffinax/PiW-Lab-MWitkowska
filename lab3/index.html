@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHIŃCZYK</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="header-up">
+        <h1>CHIŃCZYK</h1>
+          <div class="header-search">
+            <label for="game-name">Znajdź grę:</label>
+            <input
+              type="text"
+              id="game-name"
+              placeholder="Wpisz nazwę gry..."
+              class="header-input"
+              aria-label="Nazwa gry"
+            />
+            <button class="header-button">Szukaj</button>
+          </div>
+        <div class="header-buttons">
+          <button class="header-button">Rejestracja</button>
+          <button class="header-button">Logowanie</button>
+          <button class="header-button">Wyloguj</button>
+          <button class="header-button">Koszyk</button>
+        </div>
+      </div>
+
+      <div class="header-down">
+        <div class="header-filter">
+          <label for="filter-category">Kategoria:</label>
+          <select id="filter-category">
+            <option value="all">Wszystkie</option>
+            <option value="family">Rodzinne</option>
+            <option value="strategic">Strategiczne</option>
+            <option value="party">Imprezowe</option>
+            <option value="cards">Karciane</option>
+            <option value="logic">Logiczne</option>
+            <option value="adventure">Przygodowe</option>
+          </select>
+        </div>
+        <div class="header-filter">
+          <label for="filter-players">Ilość graczy:</label>
+          <select id="filter-players">
+            <option value="all">Dowolna</option>
+            <option value="solo">1 gracz (solo)</option>
+            <option value="duo">2 graczy</option>
+            <option value="traditional">3-4 graczy</option>
+            <option value="more">5+ graczy</option>
+          </select>
+        </div>
+        <div class="header-filter">
+          <label for="filter-time">Czas rozgrywki:</label>
+          <select id="filter-time">
+            <option value="all">Każdy</option>
+            <option value="fast">Szybkie (do 30 min)</option>
+            <option value="medium">Średnie (30 - 60 min)</option>
+            <option value="long">Długie (powyżej 1 godziny)</option>
+          </select>
+        </div>
+        <div class="header-filter">
+          <label for="filter-age">Wiek:</label>
+          <select id="filter-age">
+            <option value="all">Każdy</option>
+            <option value="kid">3+</option>
+            <option value="child">8+</option>
+            <option value="teen">12+</option>
+            <option value="adult">18+</option>
+          </select>
+        </div>
+        <div class="header-filter">
+          <label for="filter-price">Cena:</label>
+          <select id="filter-price">
+            <option value="all">Dowolna</option>
+            <option value="cheap">Do 50 zł</option>
+            <option value="medium">50-150 zł</option>
+            <option value="expensive">Powyżej 150 zł</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <a href="index2.html" class="game-button add-game-btn" style="text-decoration: none; text-align: center;">Dodaj nową pozycję</a>
+
+      <div class="shop-grid" id="item-list">
+        <div class="game-card" data-category="family" data-players="traditional" data-time="medium" data-age="child" data-price="medium">
+          <div class="game-info">
+            <h3>Wsiąść do Pociągu: Europa</h3>
+            <p>Gracze: 2-5 | Czas: 60 min | Wiek: 8+</p>
+            <h4>149,00 zł</h4>
+            <button class="game-button">Dodaj do koszyka</button>
+          </div>
+        </div>
+
+        <div class="game-card" data-category="party" data-players="more" data-time="fast" data-age="teen" data-price="cheap">
+          <div class="game-info">
+            <h3>Tajniacy</h3>
+            <p>Gracze: 2-8 | Czas: 15 min | Wiek: 12+</p>
+            <h4>49,00 zł</h4>
+            <button class="game-button">Dodaj do koszyka</button>
+          </div>
+        </div>
+
+        <div class="game-card" data-category="strategic" data-players="duo" data-time="long" data-age="teen" data-price="expensive">
+          <div class="game-info">
+            <h3>Terraformacja Marsa</h3>
+            <p>Gracze: 1-5 | Czas: 120 min | Wiek: 12+</p>
+            <h4>189,00 zł</h4>
+            <button class="game-button">Dodaj do koszyka</button>
+          </div>
+        </div>
+
+        <div class="game-card" data-category="cards" data-players="traditional" data-time="fast" data-age="child" data-price="cheap">
+          <div class="game-info">
+            <h3>Eksplodujące Kotki</h3>
+            <p>Gracze: 2-5 | Czas: 15 min | Wiek: 7+</p>
+            <h4>39,00 zł</h4>
+            <button class="game-button">Dodaj do koszyka</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </body>
+</html>
