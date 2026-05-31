@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
               </h1>
               
               <div className="header-buttons">
-                <Link href="/add" className="header-button">Moje gry</Link>
+                <Link href="/add" className="header-button">Nowa Gra</Link>
                 <button className="header-button">Koszyk</button>
                 <button className="header-button">Logowanie</button>
               </div>

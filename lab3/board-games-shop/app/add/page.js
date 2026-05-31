@@ -2,24 +2,19 @@
 
 import { useContext, useState, useRef } from "react";
 import BoardGameContext from "../_contexts/BoardGameContext"; 
+import { db } from "../_data/firebase"; 
+import { collection, addDoc } from "firebase/firestore";
 
 const NewGame = () => {
-  const { addNewGame } = useContext(BoardGameContext);
+  const { setGames } = useContext(BoardGameContext);
 
   const [formData, setFormData] = useState({
-    title: "",
-    publisher: "",
-    image: "",
-    min_players: 1,
-    max_players: 4,
-    avg_play_time_minutes: 60,
-    price_pln: "",
-    type: "",
-    is_expansion: false,
+    title: "", publisher: "", image: "", min_players: 1,
+    max_players: 4, avg_play_time_minutes: 60, price_pln: "",
+    type: "", is_expansion: false,
   });
 
   const descriptionRef = useRef(null);
-  
   const [toast, setToast] = useState(false);
   const [error, setError] = useState(""); 
 
@@ -36,7 +31,7 @@ const NewGame = () => {
     }));
   };
 
-  const handleAdd = (e) => {
+  const handleAdd = async (e) => {
     if (e) e.preventDefault();
 
     if (!formData.title.trim()) {
@@ -54,7 +49,7 @@ const NewGame = () => {
     const gameData = {
       title: formData.title.trim(),
       images: formData.image ? [formData.image.trim()] : [],
-      description: descriptionArray, // Tablica stringów
+      description: descriptionArray,
       min_players: Number(formData.min_players),
       max_players: Number(formData.max_players),
       avg_play_time_minutes: Number(formData.avg_play_time_minutes),
@@ -64,28 +59,26 @@ const NewGame = () => {
       type: formData.type.trim(),
     };
 
-    addNewGame(gameData);
+    try {
+      const docRef = await addDoc(collection(db, "boardgames"), gameData);
+      
+      const newGame = { ...gameData, id: docRef.id };
+      setGames((prevGames) => [...prevGames, newGame]);
 
-    setFormData({
-      title: "",
-      publisher: "",
-      image: "",
-      min_players: 1,
-      max_players: 4,
-      avg_play_time_minutes: 60,
-      price_pln: "",
-      type: "",
-      is_expansion: false,
-    });
-    if (descriptionRef.current) {
-      descriptionRef.current.value = "";
+      setFormData({
+        title: "", publisher: "", image: "", min_players: 1,
+        max_players: 4, avg_play_time_minutes: 60, price_pln: "",
+        type: "", is_expansion: false,
+      });
+      if (descriptionRef.current) {
+        descriptionRef.current.value = "";
+      }
+
+      showToast();
+    } catch (err) {
+      console.error("Błąd zapisu do Firebase: ", err);
+      setError("Nie udało się dodać gry do bazy danych.");
     }
-
-    showToast();
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") handleAdd();
   };
 
   const inputClass = "w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-black text-base";
@@ -93,7 +86,7 @@ const NewGame = () => {
 
   return (
     <section className="list-card" style={{ maxWidth: "600px", width: "100%" }}>
-      <h2 className="list-title">Nowa Gra Planszowa</h2>
+      <h2 className="list-title text-xl font-bold mb-4">Nowa Gra Planszowa</h2>
       
       <form onSubmit={handleAdd} className="flex flex-col w-full mt-2">
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
@@ -151,7 +144,20 @@ const NewGame = () => {
 
         {error && <p className="text-red-500 text-sm mb-3 font-medium">{error}</p>}
 
-        <button type="submit" className="board-game-button self-start" style={{ width: "auto", padding: "10px 24px" }}>
+        <button 
+          type="submit" 
+          style={{ 
+            backgroundColor: "#f97316",
+            color: "white", 
+            padding: "12px 24px", 
+            borderRadius: "6px", 
+            fontWeight: "bold", 
+            border: "none",
+            cursor: "pointer",
+            marginTop: "16px",
+            width: "fit-content"
+          }}
+        >
           Dodaj grę
         </button>
       </form>

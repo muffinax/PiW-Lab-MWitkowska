@@ -5,7 +5,7 @@ import BoardGameContext from "./_contexts/BoardGameContext";
 import BoardGame from "./_components/BoardGame";
 
 export default function Home() {
-  const { games } = useContext(BoardGameContext);
+  const { games, dispatchCart } = useContext(BoardGameContext);
   const [query, setQuery] = useState("");
 
   const filteredGames = useMemo(() => {
@@ -47,17 +47,19 @@ export default function Home() {
           Brak wyników dla &ldquo;{query}&rdquo;
         </p>
       ) : (
-        <div className="shop-grid">
-          {filteredGames.map((game) => (
-            <BoardGame 
-              key={game.id} 
-              {...game} 
-              onAddToCart={(title) => {
-                alert(`Dodano ${title} do koszyka!`);
-              }} 
-            />
+       <div className="shop-grid">
+        {filteredGames.map((game) => (
+          <BoardGame 
+          key={game.id} 
+          id={game.id}
+          {...game} 
+          onAddToCart={() => {
+            dispatchCart({ type: "ADD_TO_CART", payload: game });
+            alert(`Dodano ${game.title} do koszyka! (Zapisano w localStorage)`);
+          }} 
+          />
           ))}
-        </div>
+      </div>
       )}
     </section>
   );

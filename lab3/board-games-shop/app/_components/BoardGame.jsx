@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Link from 'next/link';
+import BoardGameContext from '../_contexts/BoardGameContext';
 
 export const BoardGame = ({ 
   id,
@@ -15,13 +16,14 @@ export const BoardGame = ({
   type,
   onAddToCart
 }) => {
-  const [isBought, setIsBought] = useState(false);
+  const { cart } = useContext(BoardGameContext);
+  
+  const isBought = cart.some(item => item.id === id);
   const firstImage = images && images.length > 0 ? images[0] : null;
 
   const handleBuy = (e) => {
     e.preventDefault();
-    setIsBought(true);
-    if (onAddToCart) onAddToCart(title);
+    if (onAddToCart) onAddToCart();
   };
 
   return (
