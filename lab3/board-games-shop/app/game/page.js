@@ -1,22 +1,26 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import BoardGameContext from "../../_contexts/BoardGameContext";
+import { useContext, useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import BoardGameContext from "../_contexts/BoardGameContext";
 import Link from "next/link";
 
-export default function GameDetails() {
-  const params = useParams();
+function GameContent() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  
   const { games } = useContext(BoardGameContext);
   const [game, setGame] = useState(null);
 
   useEffect(() => {
-    const foundGame = games.find((g) => g.id.toString() === params.id);
-    setGame(foundGame);
-  }, [games, params.id]);
+    if (games.length > 0 && id) {
+      const foundGame = games.find((g) => g.id === id);
+      setGame(foundGame);
+    }
+  }, [games, id]);
 
   if (!game) {
-    return <div className="text-center mt-10">Ładowanie szczegółów gry... (Upewnij się, że lista z Contextu zdążyła się załadować)</div>;
+    return <div className="text-center mt-10">Ładowanie szczegółów gry...</div>;
   }
 
   return (
@@ -54,5 +58,13 @@ export default function GameDetails() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function GameDetailsPage() {
+  return (
+    <Suspense fallback={<div className="text-center mt-10 font-bold">Ładowanie strony gry...</div>}>
+      <GameContent />
+    </Suspense>
   );
 }

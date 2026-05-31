@@ -114,6 +114,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 600px;
   margin: 0 auto 2.5rem auto; 
@@ -126,7 +127,9 @@ header {
 }
 
 .home-search-input {
-  text-align: center;
+  text-align: center !important; 
+  width: 100%;
+  max-width: 400px;
 }
 
 .shop-grid {

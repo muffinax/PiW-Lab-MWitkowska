@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { GameProvider } from "./_contexts/BoardGameContext";
 import Link from "next/link";
+import LoginButtons from "./_components/LoginButtons";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
               <div className="header-buttons">
                 <Link href="/add" className="header-button">Nowa Gra</Link>
                 <button className="header-button">Koszyk</button>
-                <button className="header-button">Logowanie</button>
+                <LoginButtons />
               </div>
             </div>
           </header>
